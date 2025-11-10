@@ -1,0 +1,6 @@
+projectKey=petclinic-angular
+serverUrl=http://localhost:9000
+serverVersion=25.11.0.114957
+dashboardUrl=http://localhost:9000/dashboard?id=petclinic-angular
+ceTaskId=710d4593-f6c4-4fa4-b43f-88d3c9eea5eb
+ceTaskUrl=http://localhost:9000/api/ce/task?id=710d4593-f6c4-4fa4-b43f-88d3c9eea5eb
