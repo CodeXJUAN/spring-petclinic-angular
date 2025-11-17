@@ -16,14 +16,14 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo '=== Instalando dependencias ==='
-                bat 'npm ci --legacy-peer-deps'
+                sh 'npm ci --legacy-peer-deps' 
             }
         }
         
         stage('Tests & Coverage') {
             steps {
                 echo '=== Ejecutando tests con cobertura ==='
-                bat 'npm run test -- --watch=false --code-coverage --browsers=ChromeHeadless'
+                sh 'npm run test -- --watch=false --code-coverage --browsers=ChromeHeadless'  
             }
             post {
                 always {
@@ -45,15 +45,15 @@ pipeline {
                 script {
                     def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                     withSonarQubeEnv('SonarQube') {
-                        bat """
-                            ${scannerHome}/bin/sonar-scanner ^
-                            -Dsonar.projectKey=petclinic-angular ^
-                            -Dsonar.sources=src ^
-                            -Dsonar.tests=src ^
-                            -Dsonar.test.inclusions=**/*.spec.ts ^
-                            -Dsonar.exclusions=**/*.spec.ts,node_modules/**,dist/** ^
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=petclinic-angular \
+                            -Dsonar.sources=src \
+                            -Dsonar.tests=src \
+                            -Dsonar.test.inclusions=**/*.spec.ts \
+                            -Dsonar.exclusions=**/*.spec.ts,node_modules/**,dist/** \
                             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-                        """
+                        """  
                     }
                 }
             }
@@ -78,7 +78,7 @@ pipeline {
         }
         always {
             echo '=== Limpieza ==='
-            cleanWs()
+            deleteDir()
         }
     }
 }
