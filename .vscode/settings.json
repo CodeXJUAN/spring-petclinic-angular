@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "local-scanner",
+        "projectKey": "petclinic-angular"
+    }
+}
