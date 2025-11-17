@@ -47,13 +47,13 @@ pipeline {
                 }
             }
         }
-
+        
         stage('SonarQube Analysis') {
             steps {
                 echo '=== Análisis de SonarQube ==='
                 script {
                     def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    withSonarQubeEnv('SonarQube Server') {  
+                    withSonarQubeEnv('My SonarQube Server') { 
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=petclinic-angular \
