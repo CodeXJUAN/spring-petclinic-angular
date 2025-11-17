@@ -23,7 +23,10 @@ pipeline {
         stage('Tests & Coverage') {
             steps {
                 echo '=== Ejecutando tests con cobertura ==='
-                sh 'npm run test -- --watch=false --code-coverage --browsers=ChromeHeadlessCI'
+                sh '''
+                    export CHROME_BIN=/usr/bin/chromium
+                    npm run test -- --watch=false --code-coverage --browsers=ChromeHeadless
+                '''
             }
             post {
                 always {
