@@ -25,7 +25,7 @@ pipeline {
                 echo '=== Ejecutando tests con cobertura ==='
                 sh '''
                     export CHROME_BIN=/usr/bin/chromium
-                    npm run test -- --watch=false --code-coverage --browsers=ChromeHeadless
+                    npm run test -- --watch=false --code-coverage --browsers=ChromeHeadlessCI
                 '''
             }
             post {
