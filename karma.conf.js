@@ -28,16 +28,20 @@ module.exports = function (config) {
       ]
     },
     reporters: ['progress', 'kjhtml'],
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadlessCI'],
     restartOnFileChange: true,
     customLaunchers: {
       ChromeHeadlessCI: {
-        base: 'Chormium',
+        base: 'ChromeHeadless',
         flags: [
           '--no-sandbox',
-          '--disable-setuid-sandbox',
+          '--headless',
           '--disable-gpu',
-          '--disable-dev-shm-usage'
+          '--disable-dev-shm-usage',
+          '--remote-debugging-port=9222',
+          '--disable-web-security',
+          '--disable-features=VizDisplayCompositor',
+          '--disable-setuid-sandbox'
         ]
       }
     }
