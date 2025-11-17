@@ -23,18 +23,24 @@ pipeline {
         stage('Tests & Coverage') {
             steps {
                 echo '=== Ejecutando tests con cobertura ==='
-                sh 'npm run test -- --watch=false --code-coverage --browsers=ChromeHeadless'  
+                sh 'npm run test -- --watch=false --code-coverage --browsers=ChromeHeadlessCI'
             }
             post {
                 always {
-                    publishHTML(target: [
-                        reportDir: 'coverage',
-                        reportFiles: 'index.html',
-                        reportName: 'Coverage Report',
-                        keepAll: true,
-                        alwaysLinkToLastBuild: true,
-                        allowMissing: false
-                    ])
+                    script {
+                        if (fileExists('coverage/index.html')) {
+                            publishHTML(target: [
+                                reportDir: 'coverage',
+                                reportFiles: 'index.html',
+                                reportName: 'Coverage Report',
+                                keepAll: true,
+                                alwaysLinkToLastBuild: true,
+                                allowMissing: false
+                            ])
+                        } else {
+                            echo '⚠️ No se generó reporte de cobertura'
+                        }
+                    }
                 }
             }
         }
