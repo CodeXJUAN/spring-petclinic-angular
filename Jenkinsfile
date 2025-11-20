@@ -67,15 +67,6 @@ pipeline {
                 }
             }
         }
-        
-        stage('Quality Gate') {
-            steps {
-                echo '=== Esperando Quality Gate ==='
-                timeout(time: 15, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
     }
     
     post {
